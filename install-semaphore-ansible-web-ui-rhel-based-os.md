@@ -50,7 +50,7 @@ sudo mariadb-secure-installation
 # Reload privilege tables now? [Y/n] y
 ```
 
-## ** Step 2: Install `git 2.x`` on Almalinux 8**
+## **Step 2: Install `git 2.x` on Almalinux 8**
 
 Semaphore requires git version 2.x to be installed on your system. So go ahead and install git 2.x on your AlmaLinux 8 server by running the following command:
 
@@ -192,7 +192,7 @@ WantedBy=multi-user.target
 Copy your configuration file to created directory, `/etc/semaphore`:
 
 ```bash
-sudo ln -s /root/config.json /etc/semaphore/config.json
+sudo ln -s /config.json /etc/semaphore/config.json
 ```
 
 Stop running instances of Semaphore.

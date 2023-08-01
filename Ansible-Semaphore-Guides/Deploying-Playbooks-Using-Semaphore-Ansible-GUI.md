@@ -1,26 +1,28 @@
-# **Setup Semaphore Ansible GUI to Run Playbooks**
+# **Deploying Playbooks Using Semaphore Ansible GUI**
 
-Semaphore Ansible GUI is a web interface that allows you to manage Ansible playbooks, inventories, and schedule jobs to run periodically or at a specific time. It is a free and open-source tool written in Go and Vue.js. It is a self-hosted application that can be installed on your local system or server.
+Semaphore Ansible GUI is a self-hosted web interface for managing Ansible playbooks, inventories, and scheduling jobs. Written in Go and Vue.js, it can be installed either locally or on a server.
 
-## Create a new directory for Ansible:
+## **1: Prepare the Ansible Environment**
+
+Create a new directory for Ansible:
 
 ```bash
 mkdir -p ansible/roles && cd ansible/roles
 ```
 
-## Make Ansible Semaphore `user` an administrator using a playbook:
+Initialize a new Ansible role to create an administrator user:
 
 ```bash
 ansible-galaxy init create_admin_user
 ```
 
-## Create a role in the roles directory:
+Create a role in the roles directory:
 
 ```bash
 vi create_admin_user/tasks/main.yml
 ```
 
-Add the following content, save and exit:
+- Add the following content to the file, then save and exit:
 
 ```bash
 - name: Add the user with a specific uid and a primary group of "admin"
@@ -49,13 +51,13 @@ Add the following content, save and exit:
   loop: "{{ admin }}"
 ```
 
-## Create a list of users to be added to the system:
+Create a list of users to be added to the system:
 
 ```bash
 vi create_admin_user/vars/main.yml
 ```
 
-Add the following content, save and exit:
+- Add the following content, save and exit:
 
 ```bash
 admin:
@@ -63,30 +65,32 @@ admin:
     comment: 'Ultimate User'
     uid: '1000'
 ```
-Change to the semaphore user (For example, vagrant is the user):
+Switch to the Semaphore user (e.g., vagrant):
 
 ```bash
 sudo su - vagrant
 ```
-## Generate SSH key pair:
+Generate a SSH key pair:
 
 ```bash
 ssh-keygen -t rsa -b 4096
 ```
 
-Create a new directory for SSH keys in the ansible directory:
+Create a new directory for the public keys:
 
 ```bash
 mkdir -p create_admin_user/files/pub_keys/
 ```
 
-Copy the public key to the `files/pub_keys` directory:
+- Copy the public key to the `files/pub_keys` directory:
 
 ```bash
 sudo cp /home/vagrant/.ssh/id_rsa.pub /home/vagrant/ansible/roles/create_admin_user/files/pub_keys/vagrant.pub
 ```
 
-## Create playbooks directory:
+## **2: Set Up Playbooks and Inventory**
+
+Create a directory for the playbooks:
 
 ```bash
 mkdir -p /home/vagrant/ansible/playbooks/users
@@ -98,13 +102,13 @@ Create a new playbook to run the role:
 vi /home/vagrant/ansible/playbooks/users/create_admin_user.yml
 ```
 
-## Create Ansible configuration file:
+Create Ansible configuration file:
 
 ```bash
 vi /home/vagrant/ansible/ansible.cfg
 ```
 
-Add the following content, save and exit:
+- Add the following content, save and exit:
 
 ```bash
 [defaults]
@@ -112,13 +116,13 @@ roles_path=roles
 host_key_checking=False
 private_key_file=~/.ssh/id_rsa
 ```
-## Install `sshpass`:
+Install `sshpass`:
 
 ```bash
 sudo yum -y install sshpass
 ```
 
-## Create an inventory directory:
+Create an inventory directory:
 
 ```bash
 mkdir -p /home/vagrant/ansible/inventory/test
@@ -130,7 +134,7 @@ Create a new inventory file:
 vi /home/vagrant/ansible/inventory/test/hosts
 ```
 
-Add the following content, save and exit:
+- Add the following content, save and exit:
 
 ```bash
 [webservers]
@@ -144,16 +148,15 @@ Add the following content, save and exit:
 192.168.98.231
 ```
 
-## Run the playbook:
+Run the playbook:
 
 ```bash
 ansible-playbook -i inventory/test/hosts playbooks/users/create_admin_user.yml -bkK
 ```
 
-## Git/GitHub Setup
+## **3: Git/GitHub Setup**
 
-Add the ssh public keys of all the hosts to GitHub as they will pull the playbooks from GitHub.:
-
+Add the ssh public keys of all the hosts to GitHub as they will pull the playbooks from GitHub:
 
 Set the default branch name to `main`:
 
@@ -187,7 +190,7 @@ Commit the changes:
 git commit -m "Initial commit"
 ```
 
-Add the remote repository:
+Add the remote repository and push the changes:
 
 ```bash
 git remote add origin git@github.com:muritalatolanrewaju/ansible.git
@@ -195,10 +198,4 @@ git branch -M main
 git push -u origin main
 ```
 
-Ensure the ssh key is accessible.
-
-
-
-
-
-
+Ensure the ssh key is accessible for future tasks.

@@ -1,16 +1,17 @@
-# **Install Semaphore Ansible Web UI on RHEL Based OS**
+# **Ansible Semaphore Installation on RHEL-Based OS**
 
-In this guide, we will install Semaphore Ansible Web UI on AlmaLinux 8. Semaphore is an open source web-based solution that makes Ansible easy to use for IT teams of all kinds. It gives you a Web interface from where you can launch and manage Ansible Tasks.
+Semaphore is an open-source, web-based solution that simplifies the use of Ansible for IT teams. This guide demonstrates its installation on AlmaLinux 8.
 
-## **What You Will Need**
+## **Prerequisites**
+
+Ensure the following are installed:
 
 - MySQL >= 5.6.4/MariaDB >= 5.3
 - ansible
 - git >= 2.x
 
-We will start the installation by ensuring these dependencies are installed on your AlmaLinux 8 server. So follow steps in the next sections to ensure all is set.
+Update the OS before starting:
 
-Before any installation we recommend you perform an update on the OS layer:
 ```bash
 sudo yum -y update
 ```
@@ -21,9 +22,9 @@ A reboot is also essential once the upgrade is made:
 sudo reboot -f
 ```
 
-## **Step 1: Install MariaDB Database Server**
+## **1. Install MariaDB Database Server**
 
-Semaphore requires a database server to store its data. In this guide, we will use MariaDB as our database server. So go ahead and install MariaDB on your AlmaLinux 8 server by running the following command:
+Semaphore requires a database server. Install MariaDB on AlmaLinux 8:
 
 ```bash
 curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
@@ -37,7 +38,7 @@ Start and enable mariadb database service:
 sudo systemctl enable --now mariadb
 ```
 
-Secure database server after installation:
+Secure database server after installation and Answer the questions that follow:
 
 ```bash
 sudo mariadb-secure-installation
@@ -50,9 +51,9 @@ sudo mariadb-secure-installation
 # Reload privilege tables now? [Y/n] y
 ```
 
-## **Step 2: Install `git 2.x` on Almalinux 8**
+## **2: Install `git 2.x`**
 
-Semaphore requires git version 2.x to be installed on your system. So go ahead and install git 2.x on your AlmaLinux 8 server by running the following command:
+Semaphore requires git version 2.x to be installed.Install git 2.x on your AlmaLinux 8 server:
 
 ```bash
 sudo yum install git
@@ -63,9 +64,7 @@ Confirm the installation by checking the version of git installed:
 git --version
 ```
 
-## **Step 3: Install Ansible on AlmaLinux 8**
-
-Semaphore requires Ansible to be installed on your system. So go ahead and install Ansible on your AlmaLinux 8 server by running the following command:
+## **3. Install Ansible**
 
 ```bash
 sudo yum -y install epel-release
@@ -78,9 +77,9 @@ Check the version of Ansible installed:
  ansible --version
 ```
 
-## **Step 4: Install Semaphore Ansible Web UI on AlmaLinux 8**
+## **4. Install Semaphore Ansible Web UI**
 
-Semaphore Ansible Web UI is available as a package on Semaphore's GitHub repository. So go ahead and clone the repository on your AlmaLinux 8 server by running the following command:
+Semaphore is available on Semaphore's GitHub repository. Clone the repository:
 
 ```bash
 sudo yum -y install wget curl
@@ -100,15 +99,13 @@ Check semaphore binary path:
 which semaphore
 ```
 
-## **Step 5: Configure Semaphore Ansible Web UI**
-
-Run the following command to create a configuration file for Semaphore:
+## **5. Configure Semaphore Ansible Web UI**
 
 ```bash
 sudo semaphore setup
 ```
 
-You will be prompted to enter the following information:
+Answer the prompts that appear, and set other configuration values in `/config.json` file:
 
 ```bash
 Hello! You will now be guided through a setup to:
@@ -134,7 +131,7 @@ What database to use:
    Enable LDAP authentication (y/n, default n): n 
 ```
 
-Set username
+Set username:
 
 ```bash
 Username: admin
@@ -145,25 +142,19 @@ WARN[0268] sql: no rows in result set                    level=Warn
  You are all setup Admin User!
  Re-launch this program pointing to the configuration file
  ./semaphore -config /config.json
-
-To run as daemon:
- nohup ./semaphore -config /config.json &
-You can login with computingforgeeks@example.com or computingforgeeks
 ```
 
 You can set other configuration values on the file `/config.json`.
 
-## **Step 6: Configure systemd unit for Semaphore**
+## **6. Configure `systemd` unit for Semaphore**
 
-Let’s now configure Semaphore Ansible UI to be managed by systemd.
-
-Create Semaphore configurations directory:
+Semaphore Ansible UI can be managed by `systemd`. Setup the configurations directory and service unit file:
 
 ```bash
 sudo mkdir /etc/semaphore
 ```
 
-Create systemd service unit file.
+Create systemd service unit file:
 
 ```bash
 sudo vi /etc/systemd/system/semaphore.service
@@ -195,7 +186,7 @@ Copy your configuration file to created directory, `/etc/semaphore`:
 sudo ln -s /config.json /etc/semaphore/config.json
 ```
 
-Stop running instances of Semaphore.
+Stop running instances of Semaphore:
 
 ```bash
 sudo pkill semaphore
@@ -207,7 +198,7 @@ Confirm:
 ps aux | grep semaphore
 ```
 
-Reload systemd and start semaphore service.
+Reload `systemd` and start semaphore service:
 
 ```bash
 sudo systemctl daemon-reload
@@ -220,30 +211,24 @@ Check status:
 sudo systemctl status semaphore
 ```
 
-Set Service to start at boot.
+Set Service to start at boot:
 
 ```bash
 sudo systemctl enable semaphore
 ```
 
-Port 3000 should now be Open.
+Port 3000 should now be Open:
 
 ```bash
 sudo ss -tunelp | grep 3000
 ```
 
-## **Step 7: Setup Nginx Proxy (Optional)**
+## **7. Setup Nginx Proxy (Optional)**
 
-If you want to access Semaphore Ansible Web UI from a remote system, you can configure Nginx as a reverse proxy for Semaphore. 
+To remotely access Semaphore, configure Nginx as a reverse proxy: 
 
-- [Configure Nginx Proxy for Semaphore Ansible Web UI](/configure-nginx-proxy-for-semaphore-ansible-web-ui.md)
+- [Nginx Proxy Configuration for Ansible Semaphore](/Ansible-Semaphore-Guides/Nginx-Proxy-Configuration-for-Ansible-Semaphore.md)
 
-## **Step 8: Access Semaphore Ansible Web UI**
+## **8. Access Semaphore Ansible Web UI**
 
-On your web browser, open semaphore Server IP on port 3000 or server name.
-
-    http://192.168.98.200:3000/
-
-
-
-
+Access Semaphore at http://<your-server-ip>:3000/ on your web browser.

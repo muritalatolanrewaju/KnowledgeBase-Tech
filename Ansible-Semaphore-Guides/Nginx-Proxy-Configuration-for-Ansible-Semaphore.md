@@ -1,52 +1,50 @@
-# **Configure Nginx Proxy for Semaphore Ansible Web UI**
+# **Nginx Proxy Configuration for Ansible Semaphore**
 
-## **Step 1: Install Ansible Semaphore**
+## **1: Ansible Semaphore Installation**
 
-[Install Ansible Semaphore on RHEL Based OS](/install-semaphore-ansible-web-ui-rhel-based-os.md)
+Follow the guide for [Ansible Semaphore Installation on RHEL-Based OS](/Ansible-Semaphore-Guides/Ansible-Semaphore-Installation-on-RHEL-Based-OS.md)
 
-## **Step 2: Install Nginx**
+## **2: Nginx Installation**
 
-Install Nginx Web server on your Semaphore server or a difference instance which will be used as proxy server for Semaphore.
-
-Install Nginx on RHEL based OS:
+Install Nginx on your Semaphore server or another instance to act as a proxy server. On RHEL based OS:
 
 ```bash
 sudo yum -y install epel-release
 sudo yum -y install vim nginx
 ```
-Once the service is installed, start it and set to be started at system boot.
+- Once the service is installed, start it and set to be started at system boot.
 
 ```bash
 sudo systemctl start nginx
 sudo systemctl enable nginx
 ```
-Verify that Nginx is running:
+- Verify that Nginx is running:
 
 ```bash
 sudo systemctl status nginx
 ```
-## **Step 3: Generate Self-Signed SSL Certificate**
+## **3: Self-Signed SSL Certificate Generation**
 
-If you don’t have a valid SSL certificate, you can generate a self-signed certificate for testing purpose.
+For testing, create a self-signed SSL certificate:
 
-Create a new directory for SSL certificate.
+- Create a new directory for SSL certificate:
 
 ```bash
 sudo mkdir /etc/nginx/ssl
 ```
 
-Change to the directory.
+- Change to the directory:
 
 ```bash
 cd /etc/nginx/ssl
 ```
-Create a new file to define the SSL certificate configuration.
+- Create a new file to define the SSL certificate configuration:
 
 ```bash
 sudo vi ssl-info.txt
 ```
 
-Add the following content to the file.
+- Add the following configuration to the ssl-info.txt file:
 
 ```bash
 [req]
@@ -76,21 +74,21 @@ DNS.1   = localhost
 DNS.2   = 127.0.0.1
 ```
 
-Generate the SSL certificate.
+- Generate the SSL certificate:
 
 ```bash
 sudo openssl req -x509 -nodes -days 3652 -newkey rsa:2048 -keyout localhost.key -out localhost.crt -config ssl-info.txt
 ```
 
-## **Step 4: Configure Nginx Proxy for Semaphore**
+## **4: Nginx Proxy Configuration for Semaphore**
 
-Create a new Nginx configuration file for Semaphore.
+Create a new Nginx configuration file for Semaphore:
 
 ```bash
 sudo vi /etc/nginx/conf.d/semaphore.conf
 ```
 
-Add the following content to the file:
+- Add the following configuration to the file:
 
 ```bash
 upstream semaphore {
@@ -141,7 +139,7 @@ server {
 }
 ```
 
-Remove the default Nginx configuration file.
+Remove the default Nginx configuration file:
 
 ```bash
 sudo rm /etc/nginx/conf.d/default.conf
@@ -153,39 +151,30 @@ Validate file syntax after the change:
 sudo nginx -t
 ```
 
-Activate and start using firewalld as your firewall management tool, you can enable and start the service using the following commands:
+Activate firewalld:
 
 ```bash
 sudo systemctl enable firewalld
 sudo systemctl start firewalld
 ```
 
-Open port 443 on firewalld.
+Open port 443 on firewalld and reload the firewall configuration:
 
 ```bash
 sudo firewall-cmd --permanent --add-port=443/tcp
-```
-
-Restart firewalld.
-
-```bash
 sudo systemctl restart firewalld
 ```
 
-Modifies the SELinux policy to allow the Apache HTTP server (httpd) to make network connections.
+Modify SELinux policy to allow Apache HTTP server to make network connections:
 
 ```bash
 sudo setsebool -P httpd_can_network_connect 1
 ```
 
-Restart Nginx service:
+Restart Nginx:
 
 ```bash
 sudo systemctl restart nginx
 ```
 
-
-Access Semaphore console via Nginx proxy server:
-
-    https://192.168.98.200/
-
+Access Semaphore console via Nginx proxy server at `https://your-server-ip>/`.

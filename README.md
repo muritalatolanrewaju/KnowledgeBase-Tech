@@ -1,4 +1,4 @@
-# KnowledgeBase-Tech Repository
+# KnowledgeBase-Tech
 
 ## Description
 

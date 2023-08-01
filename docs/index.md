@@ -1,5 +1,4 @@
-# KnowledgeBase-Tech Repository
-
+# KnowledgeBase-Tech
 ## Description
 
 This repository, `KnowledgeBase-Tech`, is a comprehensive collection of technical guides, tips, and resources, covering a wide range of technologies, programming languages, frameworks, and tools. Whether you're a seasoned developer or a beginner just getting started, you'll find valuable information to assist you on your tech journey.

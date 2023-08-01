@@ -1,0 +1,80 @@
+site_name: Knowledge Base
+site_url: https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/
+site_author: Muritala Olanrewaju
+repo_name: muritalatolanrewaju/KnowledgeBase-Tech
+repo_url: hhttps://github.com/muritalatolanrewaju/KnowledgeBase-Tech/
+theme:
+  name: material
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    - toc.integrate
+  language: en
+  palette:
+    - scheme: default
+      primary: teal
+      accent: purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: lime
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+  icon:
+    logo: logo
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/muritalaolanrewaju
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/muritalaolanrewaju
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/muritalaolanrewaju/
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+copyright: |
+  &copy; 2023 <a href="https://github.com/muritalatolanrewaju"  target="_blank" rel="noopener">Muritala Olanrewaju</a>

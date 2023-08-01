@@ -2,7 +2,7 @@ site_name: Knowledge Base
 site_url: https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/
 site_author: Muritala Olanrewaju
 repo_name: muritalatolanrewaju/KnowledgeBase-Tech
-repo_url: hhttps://github.com/muritalatolanrewaju/KnowledgeBase-Tech/
+repo_url: https://github.com/muritalatolanrewaju/KnowledgeBase-Tech/
 theme:
   name: material
   features:

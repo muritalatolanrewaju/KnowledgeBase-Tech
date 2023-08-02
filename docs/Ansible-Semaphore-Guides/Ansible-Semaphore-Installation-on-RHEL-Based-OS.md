@@ -185,7 +185,7 @@ WantedBy=multi-user.target
 Copy your configuration file to created directory, `/etc/semaphore`:
 
 ```bash
-sudo ln -s /config.json /etc/semaphore/config.json
+sudo ln -s /home/`whoami`/config.json /etc/semaphore/config.json
 ```
 
 Stop running instances of Semaphore:
@@ -211,6 +211,11 @@ Check status:
 
 ```bash
 sudo systemctl status semaphore
+```
+
+Troubleshoot errors:
+```bash
+sudo journalctl -u semaphore
 ```
 
 Set Service to start at boot:

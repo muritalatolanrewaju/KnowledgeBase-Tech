@@ -102,6 +102,17 @@ Create a new playbook to run the role:
 vi /home/`whoami`/ansible/playbooks/users/create_admin_user.yml
 ```
 
+```bash
+---
+- hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  tasks:
+    - ansible.builtin.import_role:
+        name: create_admin_user
+```
+
 Create Ansible configuration file:
 
 ```bash

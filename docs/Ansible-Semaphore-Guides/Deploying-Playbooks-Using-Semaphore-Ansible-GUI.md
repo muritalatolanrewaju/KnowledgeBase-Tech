@@ -19,7 +19,7 @@ ansible-galaxy init create_admin_user
 Create a role in the roles directory:
 
 ```bash
-vi create_admin_user/tasks/main.yml
+vi /home/`whoami`/ansible/roles/create_admin_user/tasks/main.yml
 ```
 
 - Add the following content to the file, then save and exit:
@@ -54,7 +54,7 @@ vi create_admin_user/tasks/main.yml
 Create a list of users to be added to the system:
 
 ```bash
-vi create_admin_user/vars/main.yml
+vi /home/`whoami`/ansible/roles/create_admin_user/vars/main.yml
 ```
 
 - Add the following content for a user `vagrant`, save and exit:
@@ -79,13 +79,13 @@ ssh-keygen -t rsa -b 4096
 Create a new directory for the public keys:
 
 ```bash
-mkdir -p create_admin_user/files/pub_keys/
+mkdir -p /home/`whoami`/ansible/roles/create_admin_user/files/pub_keys/
 ```
 
 - Copy the public key to the `files/pub_keys` directory:
 
 ```bash
-sudo cp /home/vagrant/.ssh/id_rsa.pub /home/vagrant/ansible/roles/create_admin_user/files/pub_keys/vagrant.pub
+sudo cp /home/`whoami`/.ssh/id_rsa.pub /home/vagrant/ansible/roles/create_admin_user/files/pub_keys/vagrant.pub
 ```
 
 ## **2: Set Up Playbooks and Inventory**
@@ -93,19 +93,19 @@ sudo cp /home/vagrant/.ssh/id_rsa.pub /home/vagrant/ansible/roles/create_admin_u
 Create a directory for the playbooks:
 
 ```bash
-mkdir -p /home/vagrant/ansible/playbooks/users
+mkdir -p /home/`whoami`/ansible/playbooks/users
 ```
 
 Create a new playbook to run the role:
 
 ```bash
-vi /home/vagrant/ansible/playbooks/users/create_admin_user.yml
+vi /home/`whoami`/ansible/playbooks/users/create_admin_user.yml
 ```
 
 Create Ansible configuration file:
 
 ```bash
-vi /home/vagrant/ansible/ansible.cfg
+vi /home/`whoami`/ansible/ansible.cfg
 ```
 
 - Add the following content, save and exit:
@@ -125,13 +125,13 @@ sudo yum -y install sshpass
 Create an inventory directory:
 
 ```bash
-mkdir -p /home/vagrant/ansible/inventory/test
+mkdir -p /home/`whoami`/ansible/inventory/test
 ```
 
 Create a new inventory file:
 
 ```bash
-vi /home/vagrant/ansible/inventory/test/hosts
+vi /home/`whoami`/ansible/inventory/test/hosts
 ```
 
 - Add the following content, save and exit:

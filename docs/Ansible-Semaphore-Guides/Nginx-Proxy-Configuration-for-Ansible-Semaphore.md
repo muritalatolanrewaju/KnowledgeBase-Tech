@@ -2,7 +2,7 @@
 
 ## **1: Ansible Semaphore Installation**
 
-Follow the guide for [Ansible Semaphore Installation on RHEL-Based OS](/Docs/Ansible-Semaphore-Guides/Ansible-Semaphore-Installation-on-RHEL-Based-OS.md)
+Follow the guide for [Ansible Semaphore Installation on RHEL-Based OS](Ansible-Semaphore-Installation-on-RHEL-Based-OS.md)
 
 ## **2: Nginx Installation**
 

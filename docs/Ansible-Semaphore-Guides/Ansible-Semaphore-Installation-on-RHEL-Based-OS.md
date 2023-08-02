@@ -238,4 +238,4 @@ To remotely access Semaphore, configure Nginx as a reverse proxy:
 
 ## **8. Access Semaphore Ansible Web UI**
 
-Access Semaphore at http://<your-server-ip>:3000/ on your web browser.
+Access Semaphore at http://`<your-server-ip>`:3000/ on your web browser.

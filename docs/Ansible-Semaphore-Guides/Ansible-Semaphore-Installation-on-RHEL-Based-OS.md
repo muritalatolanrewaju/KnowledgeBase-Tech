@@ -234,7 +234,7 @@ sudo ss -tunelp | grep 3000
 
 To remotely access Semaphore, configure Nginx as a reverse proxy: 
 
-- [Nginx Proxy Configuration for Ansible Semaphore](/Docs/Ansible-Semaphore-Guides/Nginx-Proxy-Configuration-for-Ansible-Semaphore.md)
+- [Nginx Proxy Configuration for Ansible Semaphore](Nginx-Proxy-Configuration-for-Ansible-Semaphore.md)
 
 ## **8. Access Semaphore Ansible Web UI**
 

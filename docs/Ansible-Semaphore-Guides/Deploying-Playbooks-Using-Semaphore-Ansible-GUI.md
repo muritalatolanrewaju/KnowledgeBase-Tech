@@ -57,7 +57,7 @@ Create a list of users to be added to the system:
 vi create_admin_user/vars/main.yml
 ```
 
-- Add the following content, save and exit:
+- Add the following content for a user `vagrant`, save and exit:
 
 ```bash
 admin:

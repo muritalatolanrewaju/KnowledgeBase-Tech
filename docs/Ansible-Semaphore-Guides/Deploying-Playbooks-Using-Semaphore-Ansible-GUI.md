@@ -57,18 +57,18 @@ Create a list of users to be added to the system:
 vi /home/`whoami`/ansible/roles/create_admin_user/vars/main.yml
 ```
 
-- Add the following content for a user `vagrant`, save and exit:
+- Add the following content for a user ``whoami``, save and exit:
 
 ```bash
 admin:
-  - name: 'vagrant'
+  - name: '`whoami`'
     comment: 'Ultimate User'
     uid: '1000'
 ```
-Switch to the Semaphore user (e.g., vagrant):
+Switch to the Semaphore user (e.g., `user`):
 
 ```bash
-sudo su - vagrant
+sudo su - `whoami`
 ```
 Generate a SSH key pair:
 
@@ -85,7 +85,7 @@ mkdir -p /home/`whoami`/ansible/roles/create_admin_user/files/pub_keys/
 - Copy the public key to the `files/pub_keys` directory:
 
 ```bash
-sudo cp /home/`whoami`/.ssh/id_rsa.pub /home/vagrant/ansible/roles/create_admin_user/files/pub_keys/vagrant.pub
+sudo cp /home/`whoami`/.ssh/id_rsa.pub /home/`whoami`/ansible/roles/create_admin_user/files/pub_keys/`whoami`.pub
 ```
 
 ## **2: Set Up Playbooks and Inventory**
@@ -175,7 +175,7 @@ Set the SSH key:
 
 ```bash
 git init
-git config --local core.sshCommand "/usr/bin/ssh -i ~/.ssh/vagrant"
+git config --local core.sshCommand "/usr/bin/ssh -i ~/.ssh/`whoami`"
 ```
 
 Add the files to the staging area:

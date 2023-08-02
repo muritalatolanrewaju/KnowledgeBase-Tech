@@ -107,7 +107,7 @@ sudo semaphore setup
 
 Answer the prompts that appear, and set other configuration values in `/config.json` file:
 
-```bash
+```
 Hello! You will now be guided through a setup to:
 
 1. Set up configuration for a MySQL/MariaDB database
@@ -125,15 +125,17 @@ What database to use:
    DB Password: <db_root_Password>  
    DB Name (default semaphore): semaphore
    Playbook path (default /tmp/semaphore): /opt/semaphore
-   Web root URL (optional, example http://localhost:8010/):  http://localhost:8010/
-   Enable email alerts (y/n, default n): n
-   Enable telegram alerts (y/n, default n): n
-   Enable LDAP authentication (y/n, default n): n 
+   Web root URL (optional, see https://github.com/ansible-semaphore/semaphore/wiki/Web-root-URL):  http://localhost:8010/
+   Enable email alerts? (yes/no) (default no): n
+   Enable telegram alerts? (yes/no) (default no): n
+   Enable slack alerts? (yes/no) (default no): n
+   Enable LDAP authentication? (yes/no) (default no): n
+   Config output directory (default /home/username): <ENTER>
 ```
 
 Set username:
 
-```bash
+```
 Username: admin
 Email: admin@example.com
 WARN[0268] sql: no rows in result set                    level=Warn
@@ -162,7 +164,7 @@ sudo vi /etc/systemd/system/semaphore.service
 
 Add the following content:
 
-```bash
+```
 [Unit]
 Description=Semaphore Ansible UI
 Documentation=https://github.com/ansible-semaphore/semaphore

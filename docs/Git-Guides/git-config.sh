@@ -5,19 +5,19 @@ read -p "Enter your email: " email
 
 echo "Choose your editor:"
 echo "1. VS Code"
-echo "2. Vim"
+echo "2. Nano"
 echo "3. Vi"
 read -p "Enter your choice (1, 2, or 3): " editor_choice
 
 if [ "$editor_choice" == "1" ]; then
     editor="code --wait"
 elif [ "$editor_choice" == "2" ]; then
-    editor="vim -w"
+    editor="nano -w"
 elif [ "$editor_choice" == "3" ]; then
     editor="vi"
 else
-    echo "Invalid choice. Defaulting to VS Code."
-    editor="code --wait"
+    echo "Invalid choice. Defaulting to VI."
+    editor="vi"
 fi
 
 function git_config() {

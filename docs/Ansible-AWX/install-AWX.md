@@ -3,6 +3,7 @@
 An Ansible AWX operator for Kubernetes built with Operator SDK and Ansible. 
 
 ## Resources
+
 - [k3s docs](https://docs.k3s.io/quick-start)
 - [Ansible AWX-Operator Github](https://github.com/ansible/awx-operator)
 
@@ -35,6 +36,7 @@ kubectl version
 ```bash
 ls -la /etc/rancher/k3s/k3s.yaml
 ```
+
 Here is the output:
 `-rw------- 1 root root 2969 Nov 23 22:04 /etc/rancher/k3s/k3s.yaml
 `
@@ -44,11 +46,13 @@ Here is the output:
 ```bash
 sudo chown mo:mo /etc/rancher/k3s/k3s.yaml
 ```
+
 - Check Envirinment status
 
 ```bash
 kubectl get nodes
 ```
+
 - Check work load
 
 ```bash
@@ -129,7 +133,7 @@ kubectl get pods -n awx
 sudo kubectl config set-context --current --namespace=awx
 ```
 
--  Create `awx.yaml` to pass commands to `kustomize`:
+- Create `awx.yaml` to pass commands to `kustomize`:
 
 ```yaml
 ---
@@ -162,7 +166,7 @@ kubectl get secret awx-admin-password -o jsonpath="{.data.password}" | base64 --
 
 - Navigate to the AWX UI
 
-    http://192.168.5.100:30080/
+`http://<ip address>:30080/`
 
 - Check the port AWX is running on:
 

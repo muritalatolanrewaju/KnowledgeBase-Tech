@@ -47,7 +47,7 @@ Here is the output:
 sudo chown mo:mo /etc/rancher/k3s/k3s.yaml
 ```
 
-- Check Envirinment status
+- Check environment status
 
 ```bash
 kubectl get nodes

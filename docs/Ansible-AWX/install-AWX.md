@@ -53,7 +53,7 @@ sudo chown mo:mo /etc/rancher/k3s/k3s.yaml
 kubectl get nodes
 ```
 
-- Check work load
+- Check workload
 
 ```bash
 kubectl get pods
@@ -103,7 +103,7 @@ resources:
   - github.com/ansible/awx-operator/config/default?ref=2.8.0
   - awx.yaml
 
-# Set the image tags to match the git version from above
+# Set the image tags to match the git version from the above
 images:
   - name: quay.io/ansible/awx-operator
     newTag: 2.8.0
@@ -146,7 +146,7 @@ spec:
   nodeport_port: 30080
 ```
 
-- Run the build command again:
+- Rerun the build command:
 
 ```bash
 kustomize build . | kubectl apply -f -
@@ -158,7 +158,7 @@ kustomize build . | kubectl apply -f -
 kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager
 ```
 
-- Wait for the deoploy to complete without errors, then retrieve the admin user, `admin` and password `<resourcename>-admin-password`:
+- Wait for the deploy to complete without errors, then retrieve the admin user, `admin` and password `<resourcename>-admin-password`:
 
 ```bash
 kubectl get secret awx-admin-password -o jsonpath="{.data.password}" | base64 --decode ; echo

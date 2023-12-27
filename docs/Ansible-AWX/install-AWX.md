@@ -15,20 +15,33 @@ An Ansible AWX operator for Kubernetes built with Operator SDK and Ansible.
 
 - Update the system
 
+On Ubuntu:
+
 ```bash
 sudo apt update -y && sudo apt upgrade -y
+```
+
+On Redhat:
+
+```bash
+sudo dnf update
 ```
 
 - Install Script
 
 ```bash
-curl -sfL https://get.k3s.io | sh -
+sudo curl -sfL https://get.k3s.io | sh -
 ```
 
-- Check installed k3s version
+- Add to a new environment variable to path:
 
 ```bash
-kubectl version
+echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
+```
+- Reload the Profile: 
+
+```bash
+source ~/.bashrc
 ```
 
 - Verify kube config file permission:
@@ -44,7 +57,13 @@ Here is the output:
 - Modify kube config file owner:
   
 ```bash
-sudo chown mo:mo /etc/rancher/k3s/k3s.yaml
+sudo chown <user>:<user> /etc/rancher/k3s/k3s.yaml
+```
+
+- Check installed k3s version
+
+```bash
+kubectl version
 ```
 
 - Check environment status
@@ -93,6 +112,10 @@ touch kustomization.yaml
 
 - Add `kustomize` config:
 
+```bash
+vi kustomization.yaml
+```
+
 Find the latest tag [here](https://github.com/ansible/awx-operator/releases)
 
 ```yaml
@@ -101,7 +124,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - github.com/ansible/awx-operator/config/default?ref=2.8.0
-  - awx.yaml
 
 # Set the image tags to match the git version from the above
 images:
@@ -123,6 +145,8 @@ kustomize build . | kubectl apply -f -
 ```bash
 kubectl get pods -n awx
 
+Wait a bit, and you should have the awx-operator running:
+
 # NAME                                               READY   STATUS    # RESTARTS   AGE
 # awx-operator-controller-manager-6678865c69-5lpqd   2/2     Running   0          112s
 ```
@@ -130,10 +154,20 @@ kubectl get pods -n awx
 - Set current namespace to awx:
 
 ```bash
-sudo kubectl config set-context --current --namespace=awx
+sudo /usr/local/bin/kubectl config set-context --current --namespace=awx
 ```
 
 - Create `awx.yaml` to pass commands to `kustomize`:
+
+```bash
+touch awx.yaml
+```
+
+- Create `AWX` config file:
+
+```bash
+vi awx.yaml
+```
 
 ```yaml
 ---
@@ -144,6 +178,28 @@ metadata:
 spec:
   service_type: nodeport
   nodeport_port: 30080
+```
+- Add `AWX` resources to kustomization config file:
+
+```bash
+vi kustomization.yaml
+```
+
+```yaml
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - github.com/ansible/awx-operator/config/default?ref=2.8.0
+  - awx.yaml
+
+# Set the image tags to match the git version from the above
+images:
+  - name: quay.io/ansible/awx-operator
+    newTag: 2.8.0
+
+# Specify a custom namespace in which to install AWX
+namespace: awx
 ```
 
 - Rerun the build command:
@@ -172,4 +228,16 @@ kubectl get secret awx-admin-password -o jsonpath="{.data.password}" | base64 --
 
 ```bash
 kubectl get svc
+```
+
+- Delete all pods in a  namespace:
+
+```bash
+kubectl delete pods --all --namespace awx
+```
+
+- Watch redeployed pods:
+
+```bash
+kubectl get pods --namespace awx --watch
 ```

@@ -11,6 +11,45 @@ An Ansible AWX operator for Kubernetes built with Operator SDK and Ansible.
   
 - [Kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/)
 
+## Additional setup requirements
+
+- Red Hat Enterprise Linux / CentOS / Fedora
+
+It is recommended to turn off firewalls:
+
+```bash
+systemctl disable firewalld --now
+```
+
+If you wish to keep firewalld enabled, by default, the following rules are required:
+
+```bash
+firewall-cmd --permanent --add-port=6443/tcp #apiserver
+firewall-cmd --permanent --zone=trusted --add-source=10.42.0.0/16 #pods
+firewall-cmd --permanent --zone=trusted --add-source=10.43.0.0/16 #services
+firewall-cmd --reload
+```
+
+Additional ports may need to be opened depending on your setup.
+
+- Ubuntu / Debian
+
+It is recommended to turn off ufw (uncomplicated firewall):
+
+```bash
+ufw disable
+```
+
+If you wish to keep ufw enabled, by default, the following rules are required:
+
+```bash
+ufw allow 6443/tcp #apiserver
+ufw allow from 10.42.0.0/16 to any #pods
+ufw allow from 10.43.0.0/16 to any #services
+```
+
+Additional ports may need to be opened depending on your setup.
+
 ## Install K3s
 
 - Update the system
@@ -38,6 +77,7 @@ sudo curl -sfL https://get.k3s.io | sh -
 ```bash
 echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
 ```
+
 - Reload the Profile: 
 
 ```bash
@@ -179,6 +219,7 @@ spec:
   service_type: nodeport
   nodeport_port: 30080
 ```
+
 - Add `AWX` resources to kustomization config file:
 
 ```bash

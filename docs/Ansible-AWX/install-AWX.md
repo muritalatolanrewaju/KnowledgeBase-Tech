@@ -138,7 +138,7 @@ sudo mv kustomize /usr/local/bin
 which kustomize
 ```
 
-- Install AWX Operator
+ ## Install AWX Operator
 
 - Make a new dir
   

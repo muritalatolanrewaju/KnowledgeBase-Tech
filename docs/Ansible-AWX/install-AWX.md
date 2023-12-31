@@ -138,7 +138,9 @@ sudo mv kustomize /usr/local/bin
 which kustomize
 ```
 
-- Make new dir
+- Install AWX Operator
+
+- Make a new dir
   
 ```bash
 mkdir awx && cd awx
@@ -173,8 +175,6 @@ images:
 # Specify a custom namespace in which to install AWX
 namespace: awx
 ```
-
-- Install AWX
 
 ```bash
 kustomize build . | kubectl apply -f -

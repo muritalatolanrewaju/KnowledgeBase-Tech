@@ -208,7 +208,7 @@ Download the [Git Cheat Sheet](Git-Cheat-Sheet.pdf) for a quick reference to the
 
 ## Automated Configuration Using `git-config.sh`
 
-You can also use the [git-config.sh](https://github.com/muritalatolanrewaju/KnowledgeBase-Tech/blob/main/docs/Git-Guides/git-config.sh) script to automatically configure Git. This script will prompt you for your name, email, preferred editor, and detect your operating system, and then set your Git configuration accordingly.
+You can also use the [git-config.sh](https://github.com/muritalatolanrewaju/KnowledgeBase-Tech/blob/main/docs/Git/git-config.sh) script to automatically configure Git. This script will prompt you for your name, email, preferred editor, and detect your operating system, and then set your Git configuration accordingly.
 
 You can run the script with the following command:
 

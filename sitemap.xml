@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/</loc>
+         <lastmod>2025-03-02</lastmod>
+    </url>
+    <url>
+         <loc>https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/Ansible-AWX/install-AWX/</loc>
+         <lastmod>2025-03-02</lastmod>
+    </url>
+    <url>
+         <loc>https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/Ansible-Semaphore/Ansible-Semaphore-Installation-on-RHEL-Based-OS/</loc>
+         <lastmod>2025-03-02</lastmod>
+    </url>
+    <url>
+         <loc>https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/Ansible-Semaphore/Deploying-Playbooks-Using-Semaphore-Ansible-GUI/</loc>
+         <lastmod>2025-03-02</lastmod>
+    </url>
+    <url>
+         <loc>https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/Ansible-Semaphore/Nginx-Proxy-Configuration-for-Ansible-Semaphore/</loc>
+         <lastmod>2025-03-02</lastmod>
+    </url>
+    <url>
+         <loc>https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/Git/Configure-Git/</loc>
+         <lastmod>2025-03-02</lastmod>
+    </url>
+    <url>
+         <loc>https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/Git/Troubleshoot-Git/</loc>
+         <lastmod>2025-03-02</lastmod>
+    </url>
+    <url>
+         <loc>https://muritalatolanrewaju.github.io/KnowledgeBase-Tech/VirtualBox/VirtualBox-GuestAdditions-RHEL9-CentOS9s/</loc>
+         <lastmod>2025-03-02</lastmod>
+    </url>
+</urlset>
